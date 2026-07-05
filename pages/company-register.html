@@ -1,0 +1,464 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Company Register | Placement Cell</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Roboto,sans-serif;
+}
+
+/* BACKGROUND */
+body{
+background:url("bg.jfif") center/cover no-repeat fixed;
+}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:rgba(255,255,255,0.88);
+z-index:-1;
+}
+
+/* NAVBAR */
+.navbar{
+background:#372244;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 60px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.nav-links a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+font-weight:500;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#f3c6ff;
+}
+
+/* WRAPPER */
+.wrapper{
+min-height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+
+/* CONTAINER */
+.register-container{
+width:1050px;
+max-width:95%;
+display:flex;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 20px 60px rgba(0,0,0,0.15);
+backdrop-filter: blur(10px);
+}
+
+/* LEFT SIDE */
+.left-side{
+flex:1;
+min-height:520px;
+background:linear-gradient(135deg,#5a356b,#ae6a97);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:50px;
+color:white;
+text-align:center;
+}
+
+.left-side img{
+width:230px;
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+margin-bottom:20px;
+animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0px);}
+}
+
+.left-side h3{
+margin-bottom:10px;
+font-size:22px;
+}
+
+.left-side p{
+font-size:14px;
+opacity:0.9;
+}
+
+/* RIGHT SIDE */
+.right-side{
+flex:1.2;
+background:white;
+padding:45px 50px;
+}
+
+.right-side h2{
+color:#372244;
+margin-bottom:25px;
+font-size:26px;
+}
+
+/* FORM */
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+font-weight:600;
+font-size:14px;
+color:#372244;
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+padding:13px 14px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ddd;
+background:#f8f8f8;
+font-size:14px;
+transition:0.25s;
+}
+
+.form-group input:hover,
+.form-group select:hover{
+border-color:#ae6a97;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+outline:none;
+border-color:#ae6a97;
+box-shadow:0 0 0 3px rgba(174,106,151,0.2);
+background:white;
+}
+
+/* ROW */
+.form-row{
+display:flex;
+gap:15px;
+}
+
+.form-row .form-group{
+flex:1;
+}
+
+/* BUTTON */
+.btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:40px;
+background:linear-gradient(135deg,#372244,#ae6a97);
+color:white;
+font-weight:600;
+font-size:15px;
+letter-spacing:0.5px;
+cursor:pointer;
+margin-top:20px;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* LOGIN LINK */
+.login-link{
+text-align:center;
+margin-top:18px;
+font-size:14px;
+}
+
+.login-link a{
+color:#ae6a97;
+text-decoration:none;
+font-weight:600;
+}
+
+/* VALIDATION */
+.error{
+color:red;
+font-size:12px;
+margin-top:3px;
+}
+
+.success{
+border:2px solid green !important;
+}
+
+.error-input{
+border:2px solid red !important;
+}
+
+#message{
+text-align:center;
+margin-top:10px;
+font-weight:600;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+<div class="logo">PLACEMENT CELL</div>
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+<a href="companylogin.html">Login</a>
+</div>
+</div>
+
+<!-- FORM -->
+<div class="wrapper">
+<div class="register-container">
+
+<!-- LEFT -->
+<div class="left-side">
+<img src="cp.jfif" alt="company">
+<h3>Join Placement Cell</h3>
+<p>Connect with talented students and hire efficiently.</p>
+</div>
+
+<!-- RIGHT -->
+<div class="right-side">
+
+<h2>Company Register</h2>
+
+<form id="form" action="companyregister.php" method="POST">
+
+<div class="form-group">
+<label>Company Name</label>
+<input type="text" name="company_name">
+<div class="error"></div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Industry</label>
+<input type="text" name="industry"  list="industry_options">
+<datalist id="industry_options">
+<option value="Software & IT">
+<option value="Core Engineering (Civil)">
+<option value="Core Engineering (Mechanical)">
+<option value="Core Engineering (Electrical)">
+<option value="Core Engineering (Electronics)">
+<option value="Automobile & Manufacturing">
+<option value="Construction & Infrastructure">
+<option value="Oil, Gas & Energy">
+<option value="Consulting & Analytics">
+<option value="Research & Development">
+<option value="Embedded & VLSI">
+<option value="Telecommunication">
+<option value="Other">
+</datalist>
+<div class="error"></div>
+</div>
+
+<div class="form-group">
+<label>Company Type</label>
+<select name="company_type">
+<option value="">Select</option>
+<option>Private Ltd</option>
+<option>Public Ltd</option>
+<option>MNC</option>
+<option>Startup</option>
+</select>
+<div class="error"></div>
+</div>
+</div>
+
+<div class="form-group">
+<label>Contact Person</label>
+<input type="text" name="contact_person">
+<div class="error"></div>
+</div>
+
+<div class="form-group">
+<label>Designation</label>
+<input type="text" name="designation" >
+<div class="error"></div>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" name="email">
+<div class="error"></div>
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input type="tel" name="phone">
+<div class="error"></div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Password</label>
+<input type="password" name="password">
+<div class="error"></div>
+</div>
+
+<div class="form-group">
+<label>Confirm</label>
+<input type="password" name="confirm_password">
+<div class="error"></div>
+</div>
+</div>
+
+<button class="btn">Register</button>
+
+<div class="login-link">
+Already have account? <a href="companylogin.html">Login</a>
+</div>
+
+<p id="message"></p>
+
+</form>
+
+</div>
+</div>
+</div>
+
+<script>
+
+const form = document.getElementById("form");
+
+function error(input, msg) {
+  input.nextElementSibling.innerText = msg;
+  input.classList.add("error-input");
+  input.classList.remove("success");
+}
+
+function success(input) {
+  input.nextElementSibling.innerText = "";
+  input.classList.remove("error-input");
+  input.classList.add("success");
+}
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  let valid = true;
+
+  // Company Name
+  const cn = form["company_name"];
+  if (!cn.value.trim()) { error(cn, "Enter company name"); valid = false; }
+  else success(cn);
+
+  // Industry
+  const ind = form["industry"];
+  if (!ind.value.trim()) { error(ind, "Enter industry"); valid = false; }
+  else success(ind);
+
+  // Company Type
+  const ct = form["company_type"];
+  if (!ct.value) { error(ct, "Select company type"); valid = false; }
+  else success(ct);
+
+  // Contact Person
+  const cp = form["contact_person"];
+  if (!cp.value.trim()) { error(cp, "Enter contact person name"); valid = false; }
+  else success(cp);
+
+  // Designation
+  const des = form["designation"];
+  if (!des.value.trim()) { error(des, "Enter designation"); valid = false; }
+  else success(des);
+
+  // Email
+  const em = form["email"];
+  if (!em.value.trim()) { error(em, "Enter email address"); valid = false; }
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { error(em, "Enter a valid email"); valid = false; }
+  else success(em);
+
+  // Phone
+  const ph = form["phone"];
+  if (!ph.value.trim()) { error(ph, "Enter phone number"); valid = false; }
+  else if (!/^\+?[\d]{7,15}$/.test(ph.value)) { error(ph, "Enter a valid phone number"); valid = false; }
+  else success(ph);
+
+  // Password
+  const pass  = form["password"];
+  const cpass = form["confirm_password"];
+  const pw    = pass.value;
+
+  if (!pw) {
+    error(pass, "Enter password"); valid = false;
+  } else if (pw.length < 8) {
+    error(pass, "Password must be at least 8 characters"); valid = false;
+  } else if (!/[A-Z]/.test(pw)) {
+    error(pass, "Include at least one uppercase letter"); valid = false;
+  } else if (!/[a-z]/.test(pw)) {
+    error(pass, "Include at least one lowercase letter"); valid = false;
+  } else if (!/[0-9]/.test(pw)) {
+    error(pass, "Include at least one digit"); valid = false;
+  } else if (!/[^A-Za-z0-9]/.test(pw)) {
+    error(pass, "Include at least one special character"); valid = false;
+  } else {
+    success(pass);
+  }
+
+  // Confirm Password
+  if (!cpass.value) {
+    error(cpass, "Enter confirm password"); valid = false;
+  } else if (pw !== cpass.value) {
+    error(cpass, "Passwords do not match"); valid = false;
+  } else {
+    success(cpass);
+  }
+
+  // Result
+  const msg = document.getElementById("message");
+  if (valid) {
+    msg.style.color = "green";
+    msg.innerText = "Sucessfully Register !!!!Registering...";
+    form.submit();
+  } else {
+    msg.style.color = "red";
+    msg.innerText = "Please fix the errors above.";
+  }
+
+});
+
+</script>
+
+</body>
+</html>

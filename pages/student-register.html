@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Register | Placement Cell</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Roboto, sans-serif;
+}
+
+body{
+  background:#dad4df;
+  min-height:100vh;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:#372244;
+  color:#f8f0ea;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  color:#f8f0ea;
+}
+
+.nav-links a{
+  color:#f8f0ea;
+  margin-left:25px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:white;
+  font-weight:bold;
+}
+
+/* ================= WRAPPER ================= */
+.wrapper{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:60px 20px;
+}
+
+/* ================= MAIN CONTAINER ================= */
+.register-container{
+  width:1000px;
+  background:white;
+  display:flex;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(55,34,68,0.15);
+  overflow:hidden;
+}
+
+/* ================= LEFT SIDE ================= */
+.left-side{
+  width:50%;
+  background:linear-gradient(135deg,#561d46,#ae6a97,#eca8bb);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+}
+
+.left-side img{
+max-width:90%;
+height:auto;
+border:none;
+border-radius:0;
+box-shadow:none;
+display:block;
+}
+
+/* ================= RIGHT SIDE ================= */
+.right-side{
+  width:50%;
+  padding:60px 55px;
+}
+
+.right-side h2{
+  font-size:32px;
+  margin-bottom:30px;
+  color:#372244;
+}
+
+/* ================= FORM ================= */
+.form-group{
+  margin-bottom:18px;
+}
+
+.form-group label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+  color:#372244;
+}
+
+.form-group input{
+  width:100%;
+  padding:13px;
+  border:1.5px solid #dad4df;
+  border-radius:12px;
+  font-size:15px;
+  transition:0.3s;
+}
+
+.form-group input:focus{
+  outline:none;
+  border-color:#ae6a97;
+  box-shadow:0 0 0 3px rgba(174,106,151,0.2);
+}
+
+.error{
+  color:red;
+  font-size:13px;
+  margin-top:5px;
+}
+
+.success{
+  border:2px solid #28a745 !important;
+}
+
+.error-input{
+  border:2px solid red !important;
+}
+
+/* ================= BUTTON ================= */
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(45deg,#561d46,#ae6a97,#eca8bb);
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:10px;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(55,34,68,0.3);
+}
+.login-link{
+  margin-top:20px;
+  text-align:center;
+  font-size:14px;
+  color:#555;
+}
+
+.login-link a{
+  color:#561d46;
+  font-weight:600;
+  text-decoration:none;
+  margin-left:5px;
+  transition:0.3s;
+}
+
+.login-link a:hover{
+  text-decoration:underline;
+  color:#ae6a97;
+}
+/* ================= RESPONSIVE ================= */
+@media(max-width:900px){
+  .register-container{
+    flex-direction:column;
+    width:95%;
+  }
+
+  .left-side,
+  .right-side{
+    width:100%;
+  }
+
+  .right-side{
+    padding:40px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo"> PLACEMENT CELL</div>
+  <div class="nav-links">
+    <a href="homepage.html">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Login</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="register-container">
+
+    <div class="left-side">
+      <img src="campuslife.png" alt="Students">
+    </div>
+
+    <div class="right-side">
+      <h2>Create Student Account</h2>
+<form id="registrationForm" novalidate>
+
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" name="full_name" placeholder="Enter full name">
+    <div class="error"></div>
+  </div>
+
+  <div class="form-group">
+    <label>Registration Number</label>
+    <input type="text" name="registration_no" placeholder="Enter registration number">
+    <div class="error"></div>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" name="email" placeholder="Enter email">
+    <div class="error"></div>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter password">
+    <div class="error"></div>
+  </div>
+
+  <div class="form-group">
+    <label>Confirm Password</label>
+    <input type="password" name="confirm_password" placeholder="Confirm password">
+    <div class="error"></div>
+  </div>
+
+  <button type="submit" class="btn">Register</button>
+
+
+<div class="login-link">
+  Already have an account?
+  <a href="studentlogin.html">Login here</a>
+  <p id="message" style="margin-top:15px; font-weight:600;"></p>
+</div>
+</form>
+
+<script src="studentregister.js"></script>
+
+
+</body>
+</html>

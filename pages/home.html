@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Placement Cell | Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --deep:#372244;
+  --mid:#561d46;
+  --rose:#ae6a97;
+  --blush:#eca8bb;
+  --cream:#f8f0ea;
+  --white:#ffffff;
+}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--deep);
+  color:var(--cream);
+  overflow-x:hidden;
+}
+
+/* ── ORBS ── */
+.orb{
+  position:fixed;border-radius:50%;
+  filter:blur(90px);opacity:0.22;pointer-events:none;z-index:0;
+  animation:drift 16s ease-in-out infinite;
+}
+.o1{width:500px;height:500px;background:var(--mid);top:-120px;left:-100px;}
+.o2{width:350px;height:350px;background:var(--blush);bottom:-100px;right:-80px;animation-delay:6s;}
+.o3{width:260px;height:260px;background:var(--rose);top:45%;left:55%;animation-delay:11s;}
+@keyframes drift{
+  0%,100%{transform:translate(0,0)scale(1);}
+  50%{transform:translate(28px,-28px)scale(1.08);}
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 64px;height:70px;
+  background:rgba(55,34,68,0.55);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:background 0.3s;
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;font-weight:700;
+  display:flex;align-items:center;gap:10px;
+  color:var(--white);text-decoration:none;
+  cursor:pointer;
+  user-select:none;
+}
+.nav-brand-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose),var(--blush));
+  display:inline-block;
+  transition:transform 0.15s;
+}
+.nav-brand:active .nav-brand-dot{transform:scale(1.6);}
+
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{
+  text-decoration:none;color:rgba(255,255,255,0.65);
+  font-size:0.88rem;font-weight:400;letter-spacing:0.03em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-btns{display:flex;gap:12px;}
+
+/* Only Student Login button now */
+.btn-outline{
+  padding:9px 22px;border-radius:50px;
+  border:1.5px solid rgba(255,255,255,0.35);
+  color:var(--white);background:transparent;
+  font-family:'Outfit',sans-serif;font-size:0.86rem;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  transition:background 0.2s,border-color 0.2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.6);}
+
+.btn-fill{
+  padding:9px 22px;border-radius:50px;border:none;
+  background:linear-gradient(135deg,var(--mid),var(--rose),var(--blush));
+  color:#fff;font-family:'Outfit',sans-serif;
+  font-size:0.86rem;font-weight:600;cursor:pointer;text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-fill:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(174,106,151,0.45);}
+
+/* ── SECRET ADMIN TOAST ── */
+#admin-toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.2);
+  color:var(--white);
+  padding:12px 26px;border-radius:50px;
+  font-size:0.84rem;font-weight:500;
+  z-index:9999;
+  transition:transform 0.4s ease, opacity 0.4s ease;
+  opacity:0;pointer-events:none;
+  white-space:nowrap;
+}
+#admin-toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:100px 64px 60px;
+  gap:60px;
+}
+.hero-left{
+  flex:1;max-width:580px;
+  opacity:0;transform:translateY(36px);
+  animation:up 0.9s ease forwards 0.3s;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  color:var(--white);
+  font-size:0.76rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:7px 16px;border-radius:50px;
+  margin-bottom:28px;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--white);}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,5.5vw,4.4rem);
+  font-weight:800;line-height:1.1;
+  margin-bottom:22px;
+  color:var(--white);
+}
+h1 em{
+  font-style:italic;font-weight:600;
+  background:linear-gradient(90deg,var(--rose),var(--blush));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-desc{
+  font-size:1rem;color:rgba(255,255,255,0.65);
+  line-height:1.75;font-weight:300;
+  max-width:460px;margin-bottom:40px;
+}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.hero-note{
+  margin-top:16px;font-size:0.8rem;
+  color:rgba(255,255,255,0.4);
+}
+.hero-note a{color:var(--blush);text-decoration:none;}
+.hero-note a:hover{text-decoration:underline;}
+
+/* Stats row */
+.hero-stats{
+  display:flex;gap:40px;
+  margin-top:52px;padding-top:40px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.hstat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;font-weight:700;
+  color:var(--white);
+}
+.hstat-lbl{font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:3px;}
+
+/* Hero right visual */
+.hero-right{
+  flex:0 0 420px;position:relative;
+  opacity:0;transform:translateY(36px);
+  animation:up 0.9s ease forwards 0.6s;
+}
+.hero-ring{
+  width:420px;height:420px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg,var(--mid),var(--rose),var(--blush),var(--white),var(--mid));
+  display:flex;align-items:center;justify-content:center;
+  animation:spin 18s linear infinite;
+  padding:4px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-ring-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,var(--mid) 0%,var(--deep) 65%);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:10px;
+  animation:spin 18s linear infinite reverse;
+}
+.ring-label{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;color:rgba(255,255,255,0.65);
+}
+.ring-emoji{font-size:3rem;}
+
+/* Floating badge */
+.float-badge{
+  position:absolute;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:14px;padding:12px 18px;
+  animation:bob 4s ease-in-out infinite;
+}
+.fb1{top:30px;right:-20px;animation-delay:0s;}
+.fb2{bottom:50px;left:-30px;animation-delay:2s;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.fb-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:700;color:var(--white);
+}
+.fb-lbl{font-size:0.75rem;color:rgba(255,255,255,0.5);}
+
+/* ── COMPANIES BAND ── */
+.companies{
+  position:relative;z-index:1;
+  padding:36px 64px;
+  background:rgba(255,255,255,0.05);
+  border-top:1px solid rgba(255,255,255,0.07);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.companies-label{
+  text-align:center;font-size:0.74rem;
+  font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:rgba(255,255,255,0.3);
+  margin-bottom:20px;
+}
+.companies-row{
+  display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+}
+.co-chip{
+  padding:10px 24px;border-radius:50px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.15);
+  font-size:0.85rem;font-weight:600;
+  color:rgba(255,255,255,0.6);
+  letter-spacing:0.05em;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.co-chip:hover{background:rgba(255,255,255,0.15);color:var(--white);border-color:rgba(255,255,255,0.35);}
+
+/* ── FEATURES ── */
+.features{
+  position:relative;z-index:1;
+  padding:90px 64px;
+}
+.sec-eyebrow{
+  text-align:center;
+  font-size:0.76rem;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--blush);margin-bottom:14px;
+}
+.sec-title{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:700;line-height:1.2;
+  margin-bottom:12px;
+  color:var(--white);
+}
+.sec-sub{
+  text-align:center;font-size:0.92rem;
+  color:rgba(255,255,255,0.5);font-weight:300;
+  max-width:500px;margin:0 auto 52px;line-height:1.7;
+}
+
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+/* White card */
+.feat-card{
+  background:#ffffff;
+  border:1px solid rgba(255,255,255,0.9);
+  border-radius:22px;padding:32px 24px;
+  transition:transform 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+  color:var(--deep);
+}
+.feat-card::before{
+  content:'';position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(55,34,68,0.04),transparent 60%);
+  opacity:0;transition:opacity 0.3s;border-radius:inherit;
+}
+.feat-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,0.3);}
+.feat-card:hover::before{opacity:1;}
+
+.feat-icon{
+  width:54px;height:54px;border-radius:14px;
+  background:var(--soft, #f0e4f7);
+  background:linear-gradient(135deg,rgba(55,34,68,0.08),rgba(174,106,151,0.12));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:20px;
+  transition:transform 0.3s,background 0.3s;
+}
+.feat-card:hover .feat-icon{
+  transform:rotate(-6deg)scale(1.08);
+  background:linear-gradient(135deg,var(--mid),var(--rose));
+}
+.feat-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;margin-bottom:10px;
+  color:var(--deep);
+}
+.feat-card p{font-size:0.84rem;color:#6b5470;line-height:1.65;font-weight:400;}
+
+/* ── HOW IT WORKS ── */
+.how{
+  position:relative;z-index:1;
+  padding:80px 64px;
+  background:rgba(255,255,255,0.04);
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:52px;position:relative;
+}
+.steps::before{
+  content:'';position:absolute;
+  top:38px;left:12%;right:12%;height:2px;
+  background:linear-gradient(90deg,var(--mid),var(--rose),var(--blush),rgba(255,255,255,0.4));
+  z-index:0;
+}
+.step{
+  text-align:center;position:relative;z-index:1;
+  padding:0 16px;
+}
+.step-circle{
+  width:76px;height:76px;border-radius:50%;
+  background:#ffffff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;color:var(--deep);
+  margin:0 auto 20px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.25);
+  transition:background 0.3s,color 0.3s,transform 0.3s;
+}
+.step:hover .step-circle{
+  background:linear-gradient(135deg,var(--mid),var(--rose));
+  color:var(--white);
+  transform:scale(1.08);
+}
+.step h4{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-weight:600;margin-bottom:8px;
+  color:var(--white);
+}
+.step p{font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.6;font-weight:300;}
+
+/* ── CTA ── */
+.cta-band{
+  position:relative;z-index:1;
+  margin:80px 64px;
+  border-radius:28px;
+  background:#ffffff;
+  padding:60px;overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+}
+.cta-band::before{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(174,106,151,0.1),transparent 65%);
+  right:-100px;top:-100px;pointer-events:none;
+}
+.cta-band::after{
+  content:'';position:absolute;
+  width:250px;height:250px;border-radius:50%;
+  background:radial-gradient(circle,rgba(236,168,187,0.12),transparent 65%);
+  left:30%;bottom:-80px;pointer-events:none;
+}
+.cta-text{position:relative;z-index:1;}
+.cta-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;font-weight:700;margin-bottom:12px;
+  color:var(--deep);
+}
+.cta-text p{
+  font-size:0.95rem;color:#7a5e73;
+  max-width:460px;line-height:1.7;font-weight:300;
+}
+.cta-actions{
+  display:flex;gap:14px;flex-wrap:wrap;flex-shrink:0;
+  position:relative;z-index:1;
+}
+.cta-btn-main{
+  padding:14px 32px;border-radius:50px;border:none;
+  background:var(--deep);
+  color:var(--white);
+  font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;
+  cursor:pointer;text-decoration:none;
+  transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+}
+.cta-btn-main:hover{background:var(--mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(55,34,68,0.25);}
+.cta-btn-sec{
+  padding:14px 28px;border-radius:50px;
+  border:1.5px solid rgba(55,34,68,0.2);
+  color:var(--deep);background:transparent;
+  font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  transition:border-color 0.2s,background 0.2s;
+}
+.cta-btn-sec:hover{border-color:var(--rose);color:var(--rose);}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  background:rgba(0,0,0,0.35);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:24px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:0.82rem;color:rgba(255,255,255,0.3);font-weight:300;
+}
+.footer-brand{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;color:rgba(255,255,255,0.6);
+}
+
+@keyframes up{to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:1100px){
+  .feat-grid{grid-template-columns:repeat(2,1fr);}
+  .steps{grid-template-columns:repeat(2,1fr);}
+  .steps::before{display:none;}
+  .hero{flex-direction:column;padding-top:110px;text-align:center;}
+  .hero-desc,.hero-actions{margin-left:auto;margin-right:auto;}
+  .hero-actions{justify-content:center;}
+  .hero-stats{justify-content:center;}
+  .hero-right{flex:0 0 auto;}
+  .cta-band{flex-direction:column;text-align:center;}
+  .cta-actions{justify-content:center;}
+}
+@media(max-width:640px){
+  nav{padding:0 20px;}
+  .hero,.features,.how,.companies{padding-left:20px;padding-right:20px;}
+  .feat-grid{grid-template-columns:1fr;}
+  .cta-band{margin:40px 20px;flex-direction:column;padding:36px 28px;}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+
+<!-- SECRET ADMIN TOAST -->
+<div id="admin-toast">🔐 Admin access unlocked…</div>
+
+<!-- NAV -->
+<nav>
+  <!-- Logo: click 5 times rapidly to go to admin login -->
+  <span class="nav-brand" id="logo-trigger" title="Placement Cell">
+    <span class="nav-brand-dot"></span>Placement Cell
+  </span>
+
+  <ul class="nav-links">
+    <li><a href="homepage.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="studentregister.html">Students</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+
+  <div class="nav-btns">
+    <!-- Only student login visible publicly -->
+    <a href="studentlogin.html" class="btn-outline">Student Login</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Official Placement Portal</div>
+    <h1>Launch Your <em>Dream Career</em> From Here</h1>
+    <p class="hero-desc">Connecting talented students with top recruiters. Explore opportunities, sharpen your skills, and step confidently into your future.</p>
+    <div class="hero-actions">
+      <a href="studentlogin.html" class="btn-fill" style="padding:14px 32px;font-size:0.95rem;">Get Started →</a>
+      <a href="#how" class="btn-outline" style="padding:14px 28px;font-size:0.95rem;">How it Works</a>
+    </div>
+    <p class="hero-note">Already registered? <a href="studentlogin.html">Login here</a></p>
+    <div class="hero-stats">
+      <div>
+        <div class="hstat-num">500+</div>
+        <div class="hstat-lbl">Students Placed</div>
+      </div>
+      <div>
+        <div class="hstat-num">120+</div>
+        <div class="hstat-lbl">Hiring Partners</div>
+      </div>
+      <div>
+        <div class="hstat-num">18 LPA</div>
+        <div class="hstat-lbl">Highest Package</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-ring">
+      <div class="hero-ring-inner">
+        <div class="ring-emoji">🎓</div>
+        <div class="ring-label">Your Future Awaits</div>
+      </div>
+    </div>
+    <div class="float-badge fb1">
+      <div class="fb-num">95%</div>
+      <div class="fb-lbl">Placement Rate</div>
+    </div>
+    <div class="float-badge fb2">
+      <div class="fb-num">18 LPA</div>
+      <div class="fb-lbl">Highest Package</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANIES -->
+<div class="companies">
+  <div class="companies-label">Trusted Recruiting Partners</div>
+  <div class="companies-row">
+    <div class="co-chip">TCS</div>
+    <div class="co-chip">Infosys</div>
+    <div class="co-chip">Wipro</div>
+    <div class="co-chip">Accenture</div>
+    <div class="co-chip">Cognizant</div>
+    <div class="co-chip">HCL</div>
+    <div class="co-chip">Capgemini</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="sec-eyebrow">What We Offer</div>
+  <h2 class="sec-title">Everything You Need to Get Placed</h2>
+  <p class="sec-sub">From resume building to mock interviews — we support every step of your placement journey.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3>Resume Building</h3>
+      <p>Craft a professional resume that stands out to top recruiters and clears ATS filters with ease.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3>Mock Interviews</h3>
+      <p>Practice with industry mentors and receive actionable feedback to crack every interview round.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏢</div>
+      <h3>Company Connect</h3>
+      <p>Direct connections with 120+ hiring companies across IT, Finance, and Core Engineering sectors.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>Aptitude Training</h3>
+      <p>Structured programs covering aptitude, coding challenges, and soft skills assessments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="sec-eyebrow">Simple Process</div>
+  <h2 class="sec-title">How It Works</h2>
+  <p class="sec-sub">Four easy steps to kickstart your placement journey with us.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle">1</div>
+      <h4>Register</h4>
+      <p>Create your student account and verify your enrollment details.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <h4>Fill Profile</h4>
+      <p>Complete your academic profile and upload your updated resume.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <h4>Apply</h4>
+      <p>Browse job listings and apply to companies that match your goals.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <h4>Get Placed</h4>
+      <p>Attend drives, clear interviews, and land your dream offer!</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-text">
+    <h2>Ready to Begin Your Journey?</h2>
+    <p>Join hundreds of students who have already found their dream careers through our placement cell. Register today — it's free.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="studentlogin.html" class="cta-btn-main">Register Now →</a>
+    <a href="#" class="cta-btn-sec">Learn More</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Placement Cell</span>
+  <span>© 2024 — Empowering Careers, Building Futures.</span>
+  <span>Contact: placement@college.edu</span>
+</footer>
+
+<script>
+  // ── SECRET ADMIN ACCESS ──
+  // Click the logo 5 times within 3 seconds → redirect to adminlogin.html
+  (function(){
+    const logo   = document.getElementById('logo-trigger');
+    const toast  = document.getElementById('admin-toast');
+    let clicks   = 0;
+    let timer    = null;
+
+    logo.addEventListener('click', function(){
+      clicks++;
+
+      // Reset timer on each click
+      clearTimeout(timer);
+      timer = setTimeout(function(){ clicks = 0; }, 3000);
+
+      // Show subtle hint after 3 clicks
+      if(clicks === 3){
+        toast.textContent = '🔐 Keep going…';
+        toast.classList.add('show');
+        setTimeout(()=> toast.classList.remove('show'), 1500);
+      }
+
+      // On 5th click — redirect
+      if(clicks >= 5){
+        clicks = 0;
+        clearTimeout(timer);
+        toast.textContent = '🔐 Admin access unlocked…';
+        toast.classList.add('show');
+        setTimeout(function(){
+          window.location.href = 'adminlogin.html';
+        }, 900);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

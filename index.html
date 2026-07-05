@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Placement Cell Portal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+background:#f5f5fa;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#372244;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 80px;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-size:16px;
+}
+
+.nav-links a:hover{
+text-decoration:underline;
+}
+
+/* HERO SECTION */
+
+.hero{
+height:85vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px;
+background:linear-gradient(120deg,#561d46,#ae6a97,#eca8bb);
+color:white;
+}
+
+.hero-text{
+max-width:500px;
+}
+
+.hero-text h1{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.hero-text p{
+font-size:18px;
+line-height:1.6;
+margin-bottom:30px;
+}
+
+.hero-btn{
+padding:14px 30px;
+background:white;
+color:#561d46;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.hero-btn:hover{
+transform:scale(1.05);
+}
+
+.hero img{
+width:420px;
+}
+
+/* FEATURES */
+
+.features{
+padding:80px 100px;
+text-align:center;
+}
+
+.features h2{
+font-size:36px;
+color:#372244;
+margin-bottom:50px;
+}
+
+.feature-box{
+display:flex;
+justify-content:space-between;
+gap:30px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+flex:1;
+}
+
+.card h3{
+color:#372244;
+margin-bottom:15px;
+}
+
+.card p{
+color:#555;
+font-size:15px;
+}
+
+/* FOOTER */
+
+footer{
+background:#372244;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="logo">PLACEMENT CELL</div>
+
+<div class="nav-links">
+
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Students</a>
+<a href="#">Companies</a>
+<a href="#">Announcements</a>
+<a href="#">Contact</a>
+<a href="studentlogin.html">Student Login</a>
+<a href="adminlogin.html">Admin</a>
+
+</div>
+
+</nav>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>Campus Placement Portal</h1>
+
+<p>
+A centralized system connecting students, companies and placement administrators.  
+Manage announcements, job postings, and applications efficiently.
+</p>
+
+<button class="hero-btn">Explore Opportunities</button>
+
+</div>
+
+<img src="placement.jpg">
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+<h2>Portal Features</h2>
+
+<div class="feature-box">
+
+<div class="card">
+<h3>Student Management</h3>
+<p>Students can create profiles, upload resumes, and apply for company jobs easily.</p>
+</div>
+
+<div class="card">
+<h3>Company Recruitment</h3>
+<p>Companies can post job opportunities and review eligible student applications.</p>
+</div>
+
+<div class="card">
+<h3>Placement Announcements</h3>
+<p>Admins can publish important placement updates and deadlines for students.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 Placement Cell Portal | Designed for Campus Recruitment System</p>
+
+</footer>
+
+</body>
+</html>

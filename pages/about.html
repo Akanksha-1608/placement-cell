@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us | Placement Cell</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --deep:#372244;--mid:#561d46;--rose:#ae6a97;
+  --blush:#eca8bb;--cream:#f8f0ea;--white:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--deep);color:var(--cream);overflow-x:hidden;}
+
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:0.2;pointer-events:none;z-index:0;animation:drift 16s ease-in-out infinite;}
+.o1{width:500px;height:500px;background:var(--mid);top:-120px;left:-100px;}
+.o2{width:350px;height:350px;background:var(--blush);bottom:-100px;right:-80px;animation-delay:6s;}
+.o3{width:220px;height:220px;background:var(--rose);top:40%;left:60%;animation-delay:11s;}
+@keyframes drift{0%,100%{transform:translate(0,0);}50%{transform:translate(24px,-24px);}}
+
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 64px;height:70px;
+  background:rgba(55,34,68,0.6);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;
+  display:flex;align-items:center;gap:10px;color:var(--white);
+  cursor:pointer;user-select:none;
+}
+.nav-brand-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--blush));display:inline-block;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,0.6);font-size:0.88rem;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--white);font-weight:600;border-bottom:2px solid var(--blush);padding-bottom:2px;}
+.btn-outline{
+  padding:9px 22px;border-radius:50px;border:1.5px solid rgba(255,255,255,0.3);
+  color:var(--white);background:transparent;font-family:'Outfit',sans-serif;
+  font-size:0.86rem;font-weight:500;cursor:pointer;text-decoration:none;transition:background 0.2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,0.1);}
+
+#admin-toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:rgba(255,255,255,0.1);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.2);color:var(--white);
+  padding:12px 26px;border-radius:50px;font-size:0.84rem;font-weight:500;
+  z-index:9999;transition:transform 0.4s,opacity 0.4s;opacity:0;pointer-events:none;white-space:nowrap;
+}
+#admin-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+.page{position:relative;z-index:1;}
+
+/* HERO */
+.page-hero{
+  padding:130px 64px 70px;text-align:center;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(86,29,70,0.5),transparent 70%);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  color:var(--white);font-size:0.75rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:7px 18px;border-radius:50px;margin-bottom:22px;
+}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blush);}
+.page-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,5vw,4rem);font-weight:800;
+  color:var(--white);margin-bottom:16px;line-height:1.1;
+}
+.page-hero h1 em{
+  font-style:italic;
+  background:linear-gradient(90deg,var(--rose),var(--blush));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.page-hero p{font-size:0.98rem;color:rgba(255,255,255,0.55);max-width:500px;margin:0 auto;line-height:1.75;font-weight:300;}
+
+/* ABOUT SECTION */
+.about-section{padding:70px 64px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+
+.about-text .tag{font-size:0.74rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--blush);margin-bottom:12px;}
+.about-text h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:16px;line-height:1.2;}
+.about-text p{font-size:0.93rem;color:rgba(255,255,255,0.58);line-height:1.8;font-weight:300;margin-bottom:14px;}
+
+.mini-stats{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;}
+.mstat{background:var(--white);border-radius:14px;padding:16px 20px;text-align:center;min-width:80px;}
+.mstat-n{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:var(--deep);}
+.mstat-l{font-size:0.72rem;color:#7a5e73;margin-top:2px;}
+
+.about-visual{display:flex;justify-content:center;}
+.about-ring{
+  width:290px;height:290px;border-radius:50%;padding:4px;
+  background:conic-gradient(from 0deg,var(--mid),var(--rose),var(--blush),var(--white),var(--mid));
+  animation:spin 20s linear infinite;
+  display:flex;align-items:center;justify-content:center;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.about-ring-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,var(--mid),var(--deep) 70%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  animation:spin 20s linear infinite reverse;
+}
+.about-ring-inner span{font-size:2.6rem;}
+.about-ring-inner p{font-family:'Playfair Display',serif;font-size:0.88rem;color:rgba(255,255,255,0.55);}
+
+/* WHAT WE DO */
+.what-section{
+  padding:0 64px 70px;
+}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px;}
+.wcard{
+  background:var(--white);border-radius:18px;padding:28px 24px;
+  color:var(--deep);transition:transform 0.3s,box-shadow 0.3s;
+  position:relative;overflow:hidden;
+}
+.wcard::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--mid),var(--rose),var(--blush));
+  border-radius:18px 18px 0 0;transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.wcard:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,0.28);}
+.wcard:hover::after{transform:scaleX(1);}
+.wcard-icon{font-size:1.8rem;margin-bottom:12px;}
+.wcard h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--deep);margin-bottom:8px;}
+.wcard p{font-size:0.83rem;color:#6b5470;line-height:1.6;}
+
+/* ── TEAM SECTION ── */
+.team-section{
+  padding:70px 64px;
+  background:rgba(255,255,255,0.025);
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.team-header{text-align:center;margin-bottom:50px;}
+.team-header .tag{font-size:0.74rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:var(--blush);margin-bottom:10px;}
+.team-header h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+.team-header p{font-size:0.88rem;color:rgba(255,255,255,0.5);font-weight:300;}
+
+/* LEAD */
+.lead-wrap{display:flex;justify-content:center;margin-bottom:34px;}
+.lead-card{
+  background:var(--white);border-radius:24px;padding:38px 48px;
+  text-align:center;width:320px;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+  box-shadow:0 10px 40px rgba(0,0,0,0.2);
+}
+.lead-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top,rgba(174,106,151,0.08),transparent 60%);
+}
+.lead-card:hover{transform:translateY(-10px);box-shadow:0 24px 60px rgba(0,0,0,0.35);}
+/* Shiny top border */
+.lead-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--mid),var(--rose),var(--blush));
+  border-radius:24px 24px 0 0;
+}
+.lead-crown{font-size:1.5rem;margin-bottom:6px;position:relative;z-index:1;}
+.lead-avatar{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,var(--mid),var(--rose),var(--blush));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;
+  color:var(--white);margin:0 auto 14px;
+  box-shadow:0 8px 24px rgba(86,29,70,0.5);
+  position:relative;z-index:1;
+}
+.lead-pill{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--mid),var(--rose));
+  color:var(--white);font-size:0.68rem;font-weight:600;
+  letter-spacing:0.09em;text-transform:uppercase;
+  padding:4px 14px;border-radius:50px;margin-bottom:10px;
+  position:relative;z-index:1;
+}
+.lead-card h3{
+  font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;
+  color:var(--deep);margin-bottom:4px;position:relative;z-index:1;
+}
+.lead-card .lead-role{font-size:0.8rem;color:var(--rose);font-weight:600;margin-bottom:10px;position:relative;z-index:1;}
+.lead-card p{font-size:0.82rem;color:#6b5470;line-height:1.6;position:relative;z-index:1;}
+
+/* MEMBER CARDS */
+.members-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+
+/* Regular member */
+.member-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:18px;padding:26px 20px;text-align:center;
+  transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
+}
+.member-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,0.22);box-shadow:0 16px 40px rgba(0,0,0,0.22);}
+
+/* Low-level member — slightly more subtle */
+.member-card.low{
+  background:rgba(255,255,255,0.03);
+  border:1px dashed rgba(255,255,255,0.08);
+}
+.member-card.low:hover{border-color:rgba(255,255,255,0.14);box-shadow:0 10px 28px rgba(0,0,0,0.18);}
+
+.member-avatar{
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(86,29,70,0.75),rgba(174,106,151,0.65));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;
+  color:var(--white);margin:0 auto 12px;
+  border:2px solid rgba(236,168,187,0.25);
+}
+.member-card.low .member-avatar{
+  background:linear-gradient(135deg,rgba(55,34,68,0.9),rgba(86,29,70,0.6));
+  border-color:rgba(255,255,255,0.1);
+}
+.member-card h4{font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.member-card.low h4{color:rgba(255,255,255,0.75);}
+.member-role{font-size:0.74rem;color:var(--blush);font-weight:500;margin-bottom:8px;letter-spacing:0.03em;}
+.member-card.low .member-role{color:rgba(236,168,187,0.6);}
+.member-card p{font-size:0.8rem;color:rgba(255,255,255,0.42);line-height:1.55;font-weight:300;}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  background:rgba(0,0,0,0.35);border-top:1px solid rgba(255,255,255,0.06);
+  padding:24px 64px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:0.82rem;color:rgba(255,255,255,0.3);font-weight:300;
+}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1rem;color:rgba(255,255,255,0.6);}
+
+@keyframes up{to{opacity:1;transform:translateY(0);}}
+.anim{opacity:0;transform:translateY(26px);animation:up 0.7s ease forwards;}
+
+@media(max-width:1000px){
+  .about-section{grid-template-columns:1fr;}
+  .about-visual{display:none;}
+  .what-grid{grid-template-columns:1fr 1fr;}
+  .members-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  nav{padding:0 20px;}
+  .page-hero,.about-section,.what-section,.team-section{padding-left:20px;padding-right:20px;}
+  .what-grid,.members-grid{grid-template-columns:1fr;}
+  .lead-card{width:100%;}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<div class="orb o3"></div>
+<div id="admin-toast">🔐 Admin access unlocked…</div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand" id="logo-trigger">
+    <span class="nav-brand-dot"></span>Placement Cell
+  </span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="#">Companies</a></li>
+    <li><a href="#">Students</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="studentlogin.html" class="btn-outline">Student Login</a>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="eyebrow">About Us</div>
+    <h1>Bridging <em>Talent</em> With Opportunity</h1>
+    <p>Learn about our placement cell — the mission, the values, and the team that makes it all happen.</p>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="about-text anim" style="animation-delay:0.15s">
+      <div class="tag">Who We Are</div>
+      <h2>Our Placement Cell</h2>
+      <p>The Placement Cell is the official body that bridges students with the professional world. We organize placement drives, training workshops, resume sessions, and mock interviews throughout the year.</p>
+      <p>Our dedicated team maintains strong ties with 120+ companies across IT, Finance, Core Engineering and Management sectors — ensuring every student gets a genuine shot at their dream career.</p>
+      <div class="mini-stats">
+        <div class="mstat"><div class="mstat-n">500+</div><div class="mstat-l">Placed</div></div>
+        <div class="mstat"><div class="mstat-n">120+</div><div class="mstat-l">Companies</div></div>
+        <div class="mstat"><div class="mstat-n">95%</div><div class="mstat-l">Rate</div></div>
+        <div class="mstat"><div class="mstat-n">18 LPA</div><div class="mstat-l">Highest</div></div>
+      </div>
+    </div>
+    <div class="about-visual anim" style="animation-delay:0.35s">
+      <div class="about-ring">
+        <div class="about-ring-inner">
+          <span>🎓</span>
+          <p>Est. 2005</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section class="what-section">
+    <div class="tag">What We Do</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--white);margin-bottom:4px;">Our Services</h2>
+    <div class="what-grid">
+      <div class="wcard anim" style="animation-delay:0.1s">
+        <div class="wcard-icon">📋</div>
+        <h3>Resume Building</h3>
+        <p>Personalized sessions to help students craft professional resumes that stand out to recruiters.</p>
+      </div>
+      <div class="wcard anim" style="animation-delay:0.25s">
+        <div class="wcard-icon">🎯</div>
+        <h3>Mock Interviews</h3>
+        <p>Practice rounds with mentors and industry professionals to build confidence and crack real interviews.</p>
+      </div>
+      <div class="wcard anim" style="animation-delay:0.4s">
+        <div class="wcard-icon">🏢</div>
+        <h3>Campus Drives</h3>
+        <p>On-campus recruitment events connecting students directly with hiring managers from top companies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div class="team-header">
+      <div class="tag">Project Team</div>
+      <h2>Meet Our Team</h2>
+      <p>The students who designed and built this Placement Cell portal.</p>
+    </div>
+
+    <!-- PROJECT LEAD -->
+    <div class="lead-wrap">
+      <div class="lead-card anim" style="animation-delay:0.2s">
+        <div class="lead-crown">👑</div>
+        <div class="lead-avatar">A</div>
+        <div class="lead-pill">✦ Project Lead</div>
+        <h3>Arpita Desai</h3>
+        <div class="lead-role">Lead Developer & Designer</div>
+        <p>Led the full design and development of this portal — from UI/UX and front-end to backend logic and database integration.</p>
+      </div>
+    </div>
+
+    <!-- OTHER MEMBERS -->
+    <div class="members-grid">
+
+      <!-- Regular member -->
+      <div class="member-card anim" style="animation-delay:0.3s">
+        <div class="member-avatar">A</div>
+        <h4>Akansha Mhetar</h4>
+        <div class="member-role">Frontend Developer</div>
+        <p>Worked on student-facing pages, login flow, and dashboard interface components.</p>
+      </div>
+
+      <!-- Regular member -->
+      <div class="member-card anim" style="animation-delay:0.45s">
+        <div class="member-avatar">V</div>
+        <h4>Vaishnavi Patil</h4>
+        <div class="member-role">Backend Developer</div>
+        <p>Handled PHP logic, database design, and session management throughout the portal.</p>
+      </div>
+
+      <!-- Low-level member — more subtle styling -->
+      <div class="member-card low anim" style="animation-delay:0.6s">
+        <div class="member-avatar">M</div>
+        <h4>Mital Patil</h4>
+        <div class="member-role">Support & Testing</div>
+        <p>Assisted with content management, page testing, and quality checks across the project.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Placement Cell</span>
+  <span>© 2024 — Empowering Careers, Building Futures.</span>
+  <span>Contact: placement@college.edu</span>
+</footer>
+
+<script>
+(function(){
+  const logo = document.getElementById('logo-trigger');
+  const toast = document.getElementById('admin-toast');
+  let clicks = 0, timer = null;
+  logo.addEventListener('click', function(){
+    clicks++;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ clicks = 0; }, 3000);
+    if(clicks === 3){
+      toast.textContent = '🔐 Keep going…';
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 1500);
+    }
+    if(clicks >= 5){
+      clicks = 0; clearTimeout(timer);
+      toast.textContent = '🔐 Admin access unlocked…';
+      toast.classList.add('show');
+      setTimeout(()=>{ window.location.href = 'adminlogin.html'; }, 900);
+    }
+  });
+})();
+</script>
+</body>
+</html>
